@@ -1,8 +1,11 @@
+
+
 [phases.setup]
 nixPkgs = [
   "python312",
+  "pipenv",
   "mariadb-connector-c",
-  "mariadb-client",
+      "mariadb-client",
   "pkg-config",
   "gcc",
   "gnumake"
@@ -10,6 +13,8 @@ nixPkgs = [
 
 [phases.install]
 cmds = [
+  "python3 -m ensurepip --upgrade",
+  "pip install --upgrade pip",
   "pip install -r requirements.txt"
 ]
 
