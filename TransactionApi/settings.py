@@ -25,7 +25,12 @@ SECRET_KEY = 'django-insecure-t6koi&vs^to#^s=*f&+6^ntfe7qw^#&ux0k8+yu3m^xjm81cge
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "http://localhost:8080",
+    "http://127.0.0.1:8080",
+    "127.0.0.1",
+    'localhost',
+]
 
 
 # Application definition
@@ -39,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'transaction_api',
     'rest_framework',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -75,21 +81,36 @@ WSGI_APPLICATION = 'TransactionApi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     },
+#     # "default": {
+#     #     "ENGINE": "django.db.backends.mysql",
+#     #     "NAME": "django_transaction_api_db",
+#     #     "USER": "root",
+#     #     "PASSWORD": "@Joseph84",
+#     #     "HOST": "localhost",
+#     #     "PORT": "3306",
+#     # },
+# }
+
+import os
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    },
-    # "default": {
-    #     "ENGINE": "django.db.backends.mysql",
-    #     "NAME": "django_transaction_api_db",
-    #     "USER": "root",
-    #     "PASSWORD": "@Joseph84",
-    #     "HOST": "localhost",
-    #     "PORT": "3306",
-    # },
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.getenv("MYSQL_DATABASE"),
+        'USER': os.getenv("MYSQL_USER"),
+        'PASSWORD': os.getenv("MYSQL_PASSWORD"),
+        'HOST': os.getenv("MYSQL_HOST"),
+        'PORT': os.getenv("MYSQL_PORT", "3306"),
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        }
+    }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
