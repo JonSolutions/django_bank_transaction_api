@@ -1,5 +1,6 @@
 [build]
 builder = "NIXPACKS"
+workspaceDir = "."
 
 [phases.setup]
 nixpkgsArchive = "https://github.com/NixOS/nixpkgs/archive/nixos-23.11.tar.gz"
@@ -24,4 +25,4 @@ cmds = [
 ]
 
 [start]
-cmd = "gunicorn TransactionApi.wsgi:application --bind 0.0.0.0:$PORT"
+cmd = "gunicorn --chdir TransactionApi wsgi:application --bind 0.0.0.0:$PORT"
