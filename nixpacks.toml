@@ -1,2 +1,17 @@
+[phases.setup]
+nixPkgs = [
+  "python312",
+  "mariadb-connector-c",
+  "mariadb-client",
+  "pkg-config",
+  "gcc",
+  "gnumake"
+]
+
+[phases.install]
+cmds = [
+  "pip install -r requirements.txt"
+]
+
 [start]
 cmd = "gunicorn TransactionApi.wsgi:application --bind 0.0.0.0:$PORT"
