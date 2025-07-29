@@ -1,6 +1,9 @@
 
+[build]
+builder = "NIXPACKS"
 
 [phases.setup]
+nixpkgsArchive = "https://github.com/NixOS/nixpkgs/archive/nixos-23.11.tar.gz"
 nixPkgs = [
   "python312",
   "pipenv",
@@ -9,6 +12,17 @@ nixPkgs = [
   "pkg-config",
   "gcc",
   "gnumake"
+]
+
+[phases.setup.environment]
+PYTHON_VERSION = "3.12"
+
+[phases.setup.nixPackages]
+packages = [
+  "python312",
+  "python312Packages.pip",
+  "python312Packages.setuptools",
+  "python312Packages.wheel"
 ]
 
 [phases.install]
