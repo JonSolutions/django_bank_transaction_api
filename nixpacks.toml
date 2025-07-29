@@ -4,15 +4,7 @@ builder = "NIXPACKS"
 
 [phases.setup]
 nixpkgsArchive = "https://github.com/NixOS/nixpkgs/archive/nixos-23.11.tar.gz"
-nixPkgs = [
-  "python312",
-  "pipenv",
-  "mariadb-connector-c",
-      "mariadb-client",
-  "pkg-config",
-  "gcc",
-  "gnumake"
-]
+
 
 [phases.setup.environment]
 PYTHON_VERSION = "3.12"
